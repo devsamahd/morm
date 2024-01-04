@@ -1,0 +1,5 @@
+package morm
+
+func validate(){
+
+}
