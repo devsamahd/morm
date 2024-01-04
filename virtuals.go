@@ -58,7 +58,7 @@ func (qb *CollectQueryBuilder) Virtual(fields []string, value interface{}, filte
 		return nil, err
 	}
 
-	cursor, err := collection.Aggregate(pipelineStages)
+	cursor, err := collection.c.Aggregate(pipelineStages)
 	if err != nil {
 		return nil, err
 	}
