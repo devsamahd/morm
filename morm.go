@@ -34,7 +34,7 @@ func Connect(uri string, dbName string) (*MongoDB, error) {
 }
 
 // Collection creates a new Collect instance for the specified collection and model
-func Collection(collectionName string, model interface{}) (*Collect, error) {
+func Collection(collectionName string, model interface{}) (*CollectQueryBuilder, error) {
 	collection := MongoDBInstance.Client.Database(MongoDBInstance.DBName).Collection(collectionName)
 	modelType := reflect.TypeOf(model)
 
@@ -44,9 +44,12 @@ func Collection(collectionName string, model interface{}) (*Collect, error) {
 
 	modelElemPtr := reflect.New(modelType.Elem())
 
-	return &Collect{
+	c := &Collect{
 		collection:   collection,
 		modelType:    modelType,
 		modelElemPtr: modelElemPtr,
-	}, nil
+	}
+
+
+	return &CollectQueryBuilder{c: c}, nil
 }
