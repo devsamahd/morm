@@ -45,22 +45,17 @@ func TestCollection(t *testing.T) {
 		t.Fatalf("Failed to connect to MongoDB: %v", err)
 	}
 
-	// Test with a valid model
-	type TestModel struct {
-		ID   string `bson:"_id,omitempty"`
-		Name string `bson:"name"`
-	}
 
 	collectionName := "test_collection"
 	model := &TestModel{}
-
+	
 	collect, err := morm.Collection(collectionName, model)
 	if err != nil {
 		t.Fatalf("Failed to create Collection: %v", err)
 	}
 
 	// Check if the collection is not nil
-	if collect.Query() == nil {
+	if collect.Find() == nil {
 		t.Fatal("Collection should not be nil")
 	}
 }
