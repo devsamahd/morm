@@ -25,7 +25,8 @@ type CollectQueryBuilder struct {
 	limit      int64
 	projection bson.D
 	sort       bson.D
-	method	   string
+	method     string
 	popFields  []string
-	value 	   interface{}
+	value      interface{}
+	pre		   func(string, func())
 }
