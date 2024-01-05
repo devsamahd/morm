@@ -3,7 +3,6 @@ package morm
 import (
 	"context"
 	"testing"
-
 )
 
 // TestConnect tests the Connect function
@@ -44,10 +43,9 @@ func TestCollection(t *testing.T) {
 		t.Fatalf("Failed to connect to MongoDB: %v", err)
 	}
 
-
 	collectionName := "test_collection"
 	model := &TestModel{}
-	
+
 	collect, err := Collection(collectionName, model)
 	if err != nil {
 		t.Fatalf("Failed to create Collection: %v", err)

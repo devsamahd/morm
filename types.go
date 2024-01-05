@@ -28,5 +28,5 @@ type CollectQueryBuilder struct {
 	method     string
 	popFields  []string
 	value      interface{}
-	pre		   func(string, func())
+	pre        func(string, func())
 }

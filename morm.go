@@ -50,6 +50,5 @@ func Collection(collectionName string, model interface{}) (*CollectQueryBuilder,
 		modelElemPtr: modelElemPtr,
 	}
 
-
 	return &CollectQueryBuilder{c: c}, nil
 }

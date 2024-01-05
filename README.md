@@ -2,7 +2,7 @@
 
 Morm is a powerful Object Document Mapper (ODM) for Golang, inspired by Mongoose, designed to be developer-friendly and feature-rich.
 
-[![go report card](https://goreportcard.com/badge/github.com/devsamahd/morm "go report card")](https://goreportcard.com/report/github.com/devsamahd/morm)
+[![go report card](https://goreportcard.com/report/github.com/devsamahd/morm "go report card")](https://goreportcard.com/report/github.com/devsamahd/morm)
 [![test status](https://github.com/devsamahd/morm/workflows/tests/badge.svg?branch=master "test status")](https://github.com/devsamahd/morm/actions)
 [![MIT license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
 [![Go.Dev reference](https://img.shields.io/badge/go.dev-reference-blue?logo=go&logoColor=white)](https://pkg.go.dev/github.com/devsamahd/morm?tab=doc)

@@ -44,13 +44,13 @@ func (qb *CollectQueryBuilder) Virtual(fields []string, value interface{}, filte
 		pipelineStages = append(pipelineStages, lookupStage)
 
 		if count != "true" && justOne == "true" {
-            // Use $ifNull to conditionally set the virtual field based on whether it exists or not
-            pipelineStages = append(pipelineStages, bson.D{
-                {Key: "$addFields", Value: bson.M{
-                    strings.ToLower(field) : bson.M{ "$arrayElemAt":bson.A{"$" + strings.ToLower(field), 0} },
-                }},
-            })
-        }
+			// Use $ifNull to conditionally set the virtual field based on whether it exists or not
+			pipelineStages = append(pipelineStages, bson.D{
+				{Key: "$addFields", Value: bson.M{
+					strings.ToLower(field): bson.M{"$arrayElemAt": bson.A{"$" + strings.ToLower(field), 0}},
+				}},
+			})
+		}
 	}
 
 	collection, err := Collection(collectionName, modelInstance)

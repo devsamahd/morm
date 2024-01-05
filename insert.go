@@ -14,7 +14,6 @@ func (qb *CollectQueryBuilder) Create(model interface{}, ctx ...context.Context)
 		backgroundContext = ctx[0]
 	}
 
-
 	res, err := collection.InsertOne(backgroundContext, model)
 	if err != nil {
 		return primitive.NilObjectID, err

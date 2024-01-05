@@ -26,7 +26,6 @@ func MockConnect(uri, dbName string) (*MockMongoDB, error) {
 	}, nil
 }
 
-
 // TestFind tests the Find method
 func TestFind(t *testing.T) {
 	// Mock the MongoDB connection

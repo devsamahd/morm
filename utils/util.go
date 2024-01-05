@@ -8,7 +8,7 @@ import (
 
 func GetModelType(value interface{}) (reflect.Type, error) {
 	resultType := reflect.TypeOf(value)
-	
+
 	if resultType.Kind() != reflect.Ptr {
 		return nil, errors.New("result must be a pointer")
 	}

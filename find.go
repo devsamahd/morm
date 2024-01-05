@@ -14,65 +14,65 @@ import (
 )
 
 func (qb *CollectQueryBuilder) Find(filter ...interface{}) *CollectQueryBuilder {
-    if len(filter) > 0 {
-        qb.filter = filter[0]
+	if len(filter) > 0 {
+		qb.filter = filter[0]
 	}
 	qb.method = "find"
 	return qb
 }
 
 func find(qb *CollectQueryBuilder, result interface{}) (interface{}, error) {
-    options := options.Find()
-    if qb.projection != nil {
-        options.SetProjection(qb.projection)
-    }
-    if qb.sort != nil {
-        options.SetSort(qb.sort)
-    }
-    if qb.skip != 0 {
-        options.SetSkip(qb.skip)
-    }
-    if qb.limit != 0 {
-        options.SetLimit(qb.limit)
-    }
-    
-    cursor, err := qb.c.collection.Find(context.Background(), qb.filter, options)
-    if err != nil {
-        return nil, err
-    }
-    defer cursor.Close(context.Background())
+	options := options.Find()
+	if qb.projection != nil {
+		options.SetProjection(qb.projection)
+	}
+	if qb.sort != nil {
+		options.SetSort(qb.sort)
+	}
+	if qb.skip != 0 {
+		options.SetSkip(qb.skip)
+	}
+	if qb.limit != 0 {
+		options.SetLimit(qb.limit)
+	}
 
-    var results []interface{}
+	cursor, err := qb.c.collection.Find(context.Background(), qb.filter, options)
+	if err != nil {
+		return nil, err
+	}
+	defer cursor.Close(context.Background())
 
-    for cursor.Next(context.Background()) {
-        if qb.popFields != nil {
-            result := reflect.New(qb.c.modelType.Elem()).Interface()
-            err := cursor.Decode(result)
-            if err != nil {
-                return nil, err
-            }
+	var results []interface{}
 
-            id := reflect.ValueOf(result).Elem().FieldByName("ID")
-            popRes, err := qb.Virtual(qb.popFields, result, bson.M{"_id": id.Interface().(primitive.ObjectID)})
-            if err != nil{
-                return nil, err
-            }
-            results = append(results, popRes)
-        }else{
-            result := reflect.New(qb.c.modelType.Elem()).Interface()
-            err := cursor.Decode(result)
-            if err != nil {
-                return nil, err
-            }
-            results = append(results, result)
-        }
-    }
+	for cursor.Next(context.Background()) {
+		if qb.popFields != nil {
+			result := reflect.New(qb.c.modelType.Elem()).Interface()
+			err := cursor.Decode(result)
+			if err != nil {
+				return nil, err
+			}
 
-    if err := cursor.Err(); err != nil {
-        return nil, err
-    }
-	
-    return results, nil
+			id := reflect.ValueOf(result).Elem().FieldByName("ID")
+			popRes, err := qb.Virtual(qb.popFields, result, bson.M{"_id": id.Interface().(primitive.ObjectID)})
+			if err != nil {
+				return nil, err
+			}
+			results = append(results, popRes)
+		} else {
+			result := reflect.New(qb.c.modelType.Elem()).Interface()
+			err := cursor.Decode(result)
+			if err != nil {
+				return nil, err
+			}
+			results = append(results, result)
+		}
+	}
+
+	if err := cursor.Err(); err != nil {
+		return nil, err
+	}
+
+	return results, nil
 }
 
 func (qb *CollectQueryBuilder) FindOne(filter interface{}) *CollectQueryBuilder {
@@ -81,34 +81,33 @@ func (qb *CollectQueryBuilder) FindOne(filter interface{}) *CollectQueryBuilder 
 	return qb
 }
 
-func findone(qb *CollectQueryBuilder, result interface{}) (interface{}, error){
-    options := options.FindOne()
-    if qb.projection != nil {
-        options.SetProjection(qb.projection)
-    }
-    if qb.sort != nil {
-        options.SetSort(qb.sort)
-    }
-    if qb.skip != 0 {
-        options.SetSkip(qb.skip)
-    }
-    if qb.popFields != nil {    
-        result := reflect.New(qb.c.modelType.Elem()).Interface()
-        resp, err := qb.Virtual(qb.popFields, result, qb.filter)
-        if err != nil{
-            return nil, err
-        }
-        return resp, nil
-    }
+func findone(qb *CollectQueryBuilder, result interface{}) (interface{}, error) {
+	options := options.FindOne()
+	if qb.projection != nil {
+		options.SetProjection(qb.projection)
+	}
+	if qb.sort != nil {
+		options.SetSort(qb.sort)
+	}
+	if qb.skip != 0 {
+		options.SetSkip(qb.skip)
+	}
+	if qb.popFields != nil {
+		result := reflect.New(qb.c.modelType.Elem()).Interface()
+		resp, err := qb.Virtual(qb.popFields, result, qb.filter)
+		if err != nil {
+			return nil, err
+		}
+		return resp, nil
+	}
 
-    err := qb.c.collection.FindOne(context.Background(), qb.filter, options).Decode(result)
-    if err != nil {
-        return nil, err
-    }
+	err := qb.c.collection.FindOne(context.Background(), qb.filter, options).Decode(result)
+	if err != nil {
+		return nil, err
+	}
 
-    return result, nil
+	return result, nil
 }
-
 
 func (qb *CollectQueryBuilder) FindOneAndUpdate(filter interface{}, update interface{}, ctx ...context.Context) (interface{}, error) {
 	collection := qb.c.collection

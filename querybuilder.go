@@ -30,7 +30,6 @@ func (qb *CollectQueryBuilder) Sort(sort bson.D) *CollectQueryBuilder {
 	return qb
 }
 
-
 func (qb *CollectQueryBuilder) Populate(fields []string) *CollectQueryBuilder {
 	qb.popFields = fields
 	return qb
@@ -38,21 +37,21 @@ func (qb *CollectQueryBuilder) Populate(fields []string) *CollectQueryBuilder {
 
 // Execute executes the query and returns the result
 func (qb *CollectQueryBuilder) Exec() (interface{}, error) {
-    result := reflect.New(qb.c.modelType.Elem()).Interface()
+	result := reflect.New(qb.c.modelType.Elem()).Interface()
 
-    if qb.method == "findone" {
-       res, err := findone(qb, result)
-       if err != nil {
-        return nil, err
-       }
-       return res, nil
-    }
+	if qb.method == "findone" {
+		res, err := findone(qb, result)
+		if err != nil {
+			return nil, err
+		}
+		return res, nil
+	}
 
 	//Find
-    res, err := find(qb, result)
-    if err != nil {
-        return nil, err
-    }
-    
-    return res, nil
+	res, err := find(qb, result)
+	if err != nil {
+		return nil, err
+	}
+
+	return res, nil
 }
