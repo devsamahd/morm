@@ -4,7 +4,6 @@ import (
 	"context"
 	"testing"
 
-	"github.com/devsamahd/morm"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -38,7 +37,7 @@ func TestFind(t *testing.T) {
 
 	// Mock the collection
 	model := &TestModel{}
-	qb, err := morm.Collection("test_collection", model)
+	qb, err := Collection("test_collection", model)
 	if err != nil {
 		t.Fatalf("Failed to mock collection: %v", err)
 	}
@@ -69,7 +68,7 @@ func TestFindOne(t *testing.T) {
 
 	// Mock the collection
 	model := &TestModel{}
-	qb, err := morm.Collection("test_collection", model)
+	qb, err := Collection("test_collection", model)
 	if err != nil {
 		t.Fatalf("Failed to mock collection: %v", err)
 	}
@@ -97,7 +96,7 @@ func TestFindOneAndUpdate(t *testing.T) {
 
 	// Mock the collection
 	model := &TestModel{}
-	qb, err := morm.Collection("test_collection", model)
+	qb, err := Collection("test_collection", model)
 	if err != nil {
 		t.Fatalf("Failed to mock collection: %v", err)
 	}
@@ -126,7 +125,7 @@ func TestFindOneAndRemove(t *testing.T) {
 
 	// Mock the collection
 	model := &TestModel{}
-	qb, err := morm.Collection("test_collection", model)
+	qb, err := Collection("test_collection", model)
 	if err != nil {
 		t.Fatalf("Failed to mock collection: %v", err)
 	}

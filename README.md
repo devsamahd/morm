@@ -38,7 +38,6 @@ Morm is a powerful Object Document Mapper (ODM) for Golang, inspired by Mongoose
 
 ## License
 
-© Devsamahd, 2022
+© Devsamahd, 2024
 
 Released under the [MIT License](https://github.com/devsamahd/morm/blob/master/LICENSE)
-    

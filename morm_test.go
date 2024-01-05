@@ -4,7 +4,6 @@ import (
 	"context"
 	"testing"
 
-	"github.com/devsamahd/morm"
 )
 
 // TestConnect tests the Connect function
@@ -13,23 +12,23 @@ func TestConnect(t *testing.T) {
 	uri := "mongodb://localhost:27017"
 	dbName := "test_db"
 
-	_, err := morm.Connect(uri, dbName)
+	_, err := Connect(uri, dbName)
 	if err != nil {
 		t.Fatalf("Failed to connect to MongoDB: %v", err)
 	}
 
 	// Check if MongoDBInstance is not nil
-	if morm.MongoDBInstance == nil {
+	if MongoDBInstance == nil {
 		t.Fatal("MongoDBInstance should not be nil after successful connection")
 	}
 
 	// Check if the MongoDBInstance has the correct DBName
-	if morm.MongoDBInstance.DBName != dbName {
-		t.Fatalf("Expected DBName %s, got %s", dbName, morm.MongoDBInstance.DBName)
+	if MongoDBInstance.DBName != dbName {
+		t.Fatalf("Expected DBName %s, got %s", dbName, MongoDBInstance.DBName)
 	}
 
 	// Check if Ping is successful
-	err = morm.MongoDBInstance.Client.Ping(context.Background(), nil)
+	err = MongoDBInstance.Client.Ping(context.Background(), nil)
 	if err != nil {
 		t.Fatalf("Ping to MongoDB failed: %v", err)
 	}
@@ -40,7 +39,7 @@ func TestCollection(t *testing.T) {
 	// Connect to MongoDB for testing
 	uri := "mongodb://localhost:27017"
 	dbName := "test_db"
-	_, err := morm.Connect(uri, dbName)
+	_, err := Connect(uri, dbName)
 	if err != nil {
 		t.Fatalf("Failed to connect to MongoDB: %v", err)
 	}
@@ -49,7 +48,7 @@ func TestCollection(t *testing.T) {
 	collectionName := "test_collection"
 	model := &TestModel{}
 	
-	collect, err := morm.Collection(collectionName, model)
+	collect, err := Collection(collectionName, model)
 	if err != nil {
 		t.Fatalf("Failed to create Collection: %v", err)
 	}
