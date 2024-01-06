@@ -16,11 +16,12 @@ import (
 //   - error: An error if the input is not a pointer.
 //
 // Example:
-//   var user User
-//   modelType, err := getModelType(&user)
-//   if err != nil {
-//     // Handle error
-//   }
+//
+//	var user User
+//	modelType, err := getModelType(&user)
+//	if err != nil {
+//	  // Handle error
+//	}
 //
 // This function is useful for obtaining the reflect.Type of a model from a pointer.
 func getModelType(value interface{}) (reflect.Type, error) {
@@ -43,8 +44,9 @@ func getModelType(value interface{}) (reflect.Type, error) {
 //   - string: The first string after splitting.
 //
 // Example:
-//   input := "apple, orange, banana"
-//   firstString := getFirstStringAfterSplit(input)
+//
+//	input := "apple, orange, banana"
+//	firstString := getFirstStringAfterSplit(input)
 //
 // This function is useful for extracting the first string from a comma-separated list.
 func getFirstStringAfterSplit(input string) string {
@@ -66,11 +68,12 @@ func getFirstStringAfterSplit(input string) string {
 //   - error: An error if the field is not found.
 //
 // Example:
-//   var user User
-//   tags, err := getTags(reflect.TypeOf(user), "Name")
-//   if err != nil {
-//     // Handle error
-//   }
+//
+//	var user User
+//	tags, err := getTags(reflect.TypeOf(user), "Name")
+//	if err != nil {
+//	  // Handle error
+//	}
 //
 // This function is useful for obtaining specific tags associated with a struct field.
 func getTags(modelType reflect.Type, field string) (map[string]string, error) {
@@ -108,8 +111,9 @@ func getTags(modelType reflect.Type, field string) (map[string]string, error) {
 //   - string: The input string with "[" and "]" removed.
 //
 // Example:
-//   input := "[apple]"
-//   result := removeBrackets(input)
+//
+//	input := "[apple]"
+//	result := removeBrackets(input)
 //
 // This function is useful for cleaning up strings that contain square brackets.
 func removeBrackets(input string) string {

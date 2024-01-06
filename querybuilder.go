@@ -13,7 +13,8 @@ import (
 //   - n: The number of documents to skip.
 //
 // Example:
-//   qb.Skip(10).Limit(5).Execute()
+//
+//	qb.Skip(10).Limit(5).Execute()
 //
 // This method is useful for implementing pagination in query results.
 func (qb *CollectQueryBuilder) Skip(n int64) *CollectQueryBuilder {
@@ -28,7 +29,8 @@ func (qb *CollectQueryBuilder) Skip(n int64) *CollectQueryBuilder {
 //   - n: The maximum number of documents to return.
 //
 // Example:
-//   qb.Limit(20).Sort(bson.D{{"timestamp", -1}}).Execute()
+//
+//	qb.Limit(20).Sort(bson.D{{"timestamp", -1}}).Execute()
 //
 // This method is commonly used to control the size of the result set and manage query performance.
 func (qb *CollectQueryBuilder) Limit(n int64) *CollectQueryBuilder {
@@ -43,7 +45,8 @@ func (qb *CollectQueryBuilder) Limit(n int64) *CollectQueryBuilder {
 //   - projection: A BSON document representing the projection.
 //
 // Example:
-//   qb.Projection(bson.D{{"name", 1}, {"age", 1}}).Skip(5).Execute()
+//
+//	qb.Projection(bson.D{{"name", 1}, {"age", 1}}).Skip(5).Execute()
 //
 // This method is useful for selecting specific fields in the query result.
 func (qb *CollectQueryBuilder) Projection(projection bson.D) *CollectQueryBuilder {
@@ -58,7 +61,8 @@ func (qb *CollectQueryBuilder) Projection(projection bson.D) *CollectQueryBuilde
 //   - sort: A BSON document representing the sort order.
 //
 // Example:
-//   qb.Sort(bson.D{{"timestamp", -1}}).Limit(10).Execute()
+//
+//	qb.Sort(bson.D{{"timestamp", -1}}).Limit(10).Execute()
 //
 // This method is commonly used for ordering query results based on one or more fields.
 func (qb *CollectQueryBuilder) Sort(sort bson.D) *CollectQueryBuilder {
@@ -70,7 +74,8 @@ func (qb *CollectQueryBuilder) Sort(sort bson.D) *CollectQueryBuilder {
 // It takes a slice of strings representing the field names to populate.
 //
 // Example:
-//   qb.Populate([]string{"Author", "Comments"})
+//
+//	qb.Populate([]string{"Author", "Comments"})
 //
 // This method is commonly used to specify fields that are references to other collections
 // and need to be populated with their actual values in the query result.
@@ -89,11 +94,12 @@ func (qb *CollectQueryBuilder) Populate(fields []string) *CollectQueryBuilder {
 //   - error: An error if the query execution fails.
 //
 // Example:
-//   var user User
-//   err := qb.Filter(bson.D{{"name", "John"}}).Exec(&user)
-//   if err != nil {
-//     // Handle error
-//   }
+//
+//	var user User
+//	err := qb.Filter(bson.D{{"name", "John"}}).Exec(&user)
+//	if err != nil {
+//	  // Handle error
+//	}
 //
 // This method is used to execute the configured MongoDB query and retrieve the result.
 // The type of 'result' should be a pointer to the model struct representing the collection documents.

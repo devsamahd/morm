@@ -19,16 +19,17 @@ import (
 //   - error: An error if the conversion fails.
 //
 // Example:
-//   type UpdateData struct {
-//     Field1 string `bson:"field1"`
-//     Field2 int    `bson:"field2"`
-//   }
 //
-//   data := UpdateData{"value1", 42}
-//   converted, err := ToUpdateStruct(data)
-//   if err != nil {
-//     // Handle error
-//   }
+//	type UpdateData struct {
+//	  Field1 string `bson:"field1"`
+//	  Field2 int    `bson:"field2"`
+//	}
+//
+//	data := UpdateData{"value1", 42}
+//	converted, err := ToUpdateStruct(data)
+//	if err != nil {
+//	  // Handle error
+//	}
 //
 // This function is useful for converting a struct to the format required for MongoDB update operations.
 func ToUpdateStruct(data interface{}) (primitive.M, error) {
@@ -58,12 +59,13 @@ func ToUpdateStruct(data interface{}) (primitive.M, error) {
 //   - error: An error if the update operation fails.
 //
 // Example:
-//   filter := bson.D{{"name", "John"}}
-//   update := bson.D{{"$set", bson.D{{"age", 30}}}}
-//   err := qb.UpdateOne(filter, update)
-//   if err != nil {
-//     // Handle error
-//   }
+//
+//	filter := bson.D{{"name", "John"}}
+//	update := bson.D{{"$set", bson.D{{"age", 30}}}}
+//	err := qb.UpdateOne(filter, update)
+//	if err != nil {
+//	  // Handle error
+//	}
 //
 // This method is useful for updating a single document in a MongoDB collection.
 func (qb *CollectQueryBuilder) UpdateOne(filter interface{}, update interface{}) error {
@@ -98,12 +100,13 @@ func (qb *CollectQueryBuilder) UpdateOne(filter interface{}, update interface{})
 //   - error: An error if the update operation fails.
 //
 // Example:
-//   filter := bson.D{{"status", "pending"}}
-//   update := bson.D{{"$set", bson.D{{"status", "processed"}}}}
-//   err := qb.Update(filter, update)
-//   if err != nil {
-//     // Handle error
-//   }
+//
+//	filter := bson.D{{"status", "pending"}}
+//	update := bson.D{{"$set", bson.D{{"status", "processed"}}}}
+//	err := qb.Update(filter, update)
+//	if err != nil {
+//	  // Handle error
+//	}
 //
 // This method is useful for updating multiple documents in a MongoDB collection.
 func (qb *CollectQueryBuilder) Update(filter interface{}, update interface{}, ctx ...context.Context) error {
