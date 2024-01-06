@@ -6,7 +6,6 @@ import (
 	"reflect"
 	"time"
 
-	"github.com/devsamahd/morm/utils"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -134,7 +133,7 @@ func (qb *CollectQueryBuilder) FindOneAndUpdate(filter interface{}, update inter
 	}
 
 	// Decode the result into the original model
-	modelType, err := utils.GetModelType(qb.c.modelElemPtr.Interface())
+	modelType, err := getModelType(qb.c.modelElemPtr.Interface())
 	if err != nil {
 		return nil, err
 	}
@@ -167,7 +166,7 @@ func (qb *CollectQueryBuilder) FindOneAndRemove(filter interface{}, ctx ...conte
 	}
 
 	// Decode the result into the original model
-	modelType, err := utils.GetModelType(qb.c.modelElemPtr.Interface())
+	modelType, err := getModelType(qb.c.modelElemPtr.Interface())
 	if err != nil {
 		return nil, err
 	}

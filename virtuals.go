@@ -5,12 +5,11 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/devsamahd/morm/utils"
 	"go.mongodb.org/mongo-driver/bson"
 )
 
 func (qb *CollectQueryBuilder) Virtual(fields []string, value interface{}, filter interface{}) (interface{}, error) {
-	modelType, err := utils.GetModelType(value)
+	modelType, err := getModelType(value)
 	if err != nil {
 		return nil, err
 	}
@@ -22,7 +21,7 @@ func (qb *CollectQueryBuilder) Virtual(fields []string, value interface{}, filte
 	pipelineStages = append(pipelineStages, bson.D{{Key: "$match", Value: filter}})
 
 	for _, field := range fields {
-		tags, err := utils.GetTags(modelType, field)
+		tags, err := getTags(modelType, field)
 		if err != nil {
 			return nil, err
 		}

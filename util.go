@@ -1,4 +1,4 @@
-package utils
+package morm
 
 import (
 	"errors"
@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-func GetModelType(value interface{}) (reflect.Type, error) {
+func getModelType(value interface{}) (reflect.Type, error) {
 	resultType := reflect.TypeOf(value)
 
 	if resultType.Kind() != reflect.Ptr {
@@ -17,7 +17,7 @@ func GetModelType(value interface{}) (reflect.Type, error) {
 	return modelType, nil
 }
 
-func GetFirstStringAfterSplit(input string) string {
+func getFirstStringAfterSplit(input string) string {
 	splitStrings := strings.Split(input, ",")
 	if len(splitStrings) > 0 {
 		return splitStrings[0]
@@ -25,7 +25,7 @@ func GetFirstStringAfterSplit(input string) string {
 	return ""
 }
 
-func GetTags(modelType reflect.Type, field string) (map[string]string, error) {
+func getTags(modelType reflect.Type, field string) (map[string]string, error) {
 	fieldTags := make(map[string]string)
 
 	for i := 0; i < modelType.NumField(); i++ {
