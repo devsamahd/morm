@@ -57,7 +57,7 @@ func find(qb *CollectQueryBuilder, result interface{}) (interface{}, error) {
 			}
 
 			id := reflect.ValueOf(result).Elem().FieldByName("ID")
-			popRes, err := qb.Virtual(qb.popFields, result, bson.M{"_id": id.Interface().(primitive.ObjectID)})
+			popRes, err := qb.virtual(qb.popFields, result, bson.M{"_id": id.Interface().(primitive.ObjectID)})
 			if err != nil {
 				return nil, err
 			}
@@ -103,7 +103,7 @@ func findone(qb *CollectQueryBuilder, result interface{}) (interface{}, error) {
 	}
 	if qb.popFields != nil {
 		result := reflect.New(qb.c.modelType.Elem()).Interface()
-		resp, err := qb.Virtual(qb.popFields, result, qb.filter)
+		resp, err := qb.virtual(qb.popFields, result, qb.filter)
 		if err != nil {
 			return nil, err
 		}

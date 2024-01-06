@@ -8,7 +8,22 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 )
 
-func (qb *CollectQueryBuilder) Virtual(fields []string, value interface{}, filter interface{}) (interface{}, error) {
+// Virtual performs a virtual lookup on the specified fields and updates the provided value accordingly.
+// It uses the MongoDB aggregation framework to perform the lookup and populate the specified fields.
+//
+// The virtual lookup involves creating a $lookup stage for each field, linking to the related collection,
+// and updating the value based on the specified local and foreign fields. If the field has "justOne" set to true,
+// it uses $arrayElemAt to ensure a single value is returned.
+//
+// Parameters:
+//   - fields: A slice of strings specifying the fields to perform virtual lookup.
+//   - value: The interface{} value to be updated with the virtual lookup results.
+//   - filter: The filter to match documents for the virtual lookup.
+//
+// Returns:
+//   - interface{}: The updated value after the virtual lookup.
+//   - error: An error if any occurred during the virtual lookup process.
+func (qb *CollectQueryBuilder) virtual(fields []string, value interface{}, filter interface{}) (interface{}, error) {
 	modelType, err := getModelType(value)
 	if err != nil {
 		return nil, err
