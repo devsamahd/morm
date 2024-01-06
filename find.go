@@ -12,6 +12,8 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
+// Find sets the filter for the MongoDB query in the CollectQueryBuilder and specifies it's a find operation.
+// Additional filter conditions can be provided as optional arguments.
 func (qb *CollectQueryBuilder) Find(filter ...interface{}) *CollectQueryBuilder {
 	if len(filter) > 0 {
 		qb.filter = filter[0]
@@ -20,6 +22,9 @@ func (qb *CollectQueryBuilder) Find(filter ...interface{}) *CollectQueryBuilder 
 	return qb
 }
 
+// find performs the MongoDB find operation based on the CollectQueryBuilder configuration.
+// It supports projection, sorting, skipping, and limiting of results.
+// The results are decoded into the provided result interface.
 func find(qb *CollectQueryBuilder, result interface{}) (interface{}, error) {
 	options := options.Find()
 	if qb.projection != nil {
@@ -74,12 +79,17 @@ func find(qb *CollectQueryBuilder, result interface{}) (interface{}, error) {
 	return results, nil
 }
 
+// FindOne sets the filter for the MongoDB query in the CollectQueryBuilder and specifies it's a findone operation.
+// The result is decoded into the provided result interface.
 func (qb *CollectQueryBuilder) FindOne(filter interface{}) *CollectQueryBuilder {
 	qb.filter = filter
 	qb.method = "findone"
 	return qb
 }
 
+// findone performs the MongoDB findone operation based on the CollectQueryBuilder configuration.
+// It supports projection, sorting, skipping, and populate fields.
+// The result is decoded into the provided result interface.
 func findone(qb *CollectQueryBuilder, result interface{}) (interface{}, error) {
 	options := options.FindOne()
 	if qb.projection != nil {
@@ -108,6 +118,9 @@ func findone(qb *CollectQueryBuilder, result interface{}) (interface{}, error) {
 	return result, nil
 }
 
+// FindOneAndUpdate finds a single document in the specified collection based on the filter and updates it.
+// It returns the updated document.
+// The update includes setting the "updatedAt" field to the current time.
 func (qb *CollectQueryBuilder) FindOneAndUpdate(filter interface{}, update interface{}, ctx ...context.Context) (interface{}, error) {
 	collection := qb.c.collection
 	var backgroundContext = context.Background()
@@ -147,7 +160,8 @@ func (qb *CollectQueryBuilder) FindOneAndUpdate(filter interface{}, update inter
 	return resultValue, nil
 }
 
-// FindOneAndRemove finds a single document in the specified collection based on the filter and removes it
+// FindOneAndRemove finds a single document in the specified collection based on the filter and removes it.
+// It returns the removed document.
 func (qb *CollectQueryBuilder) FindOneAndRemove(filter interface{}, ctx ...context.Context) (interface{}, error) {
 	collection := qb.c.collection
 	var backgroundContext = context.Background()

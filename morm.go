@@ -1,3 +1,4 @@
+// Package morm provides a simple MongoDB wrapper for Go applications.
 package morm
 
 import (
@@ -10,9 +11,11 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
+// MongoDBInstance represents a global instance of MongoDB connection.
 var MongoDBInstance *MongoDB
 
-// Connect establishes a connection to MongoDB and returns a MongoDB instance
+// Connect establishes a connection to MongoDB and returns a MongoDB instance.
+// It takes the MongoDB URI and the name of the database as parameters.
 func Connect(uri string, dbName string) (*MongoDB, error) {
 	clientOptions := options.Client().ApplyURI(uri)
 	client, err := mongo.Connect(context.Background(), clientOptions)
@@ -33,7 +36,9 @@ func Connect(uri string, dbName string) (*MongoDB, error) {
 	return MongoDBInstance, nil
 }
 
-// Collection creates a new Collect instance for the specified collection and model
+// Collection creates a new Collect instance for the specified collection and model.
+// It takes the collection name and a model (pointer to a struct) as parameters.
+// Returns a CollectQueryBuilder for building queries on the collection.
 func Collection(collectionName string, model interface{}) (*CollectQueryBuilder, error) {
 	collection := MongoDBInstance.Client.Database(MongoDBInstance.DBName).Collection(collectionName)
 	modelType := reflect.TypeOf(model)
