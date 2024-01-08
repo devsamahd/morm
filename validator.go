@@ -1,5 +1,5 @@
 package morm
 
 func validate() {
-
+	
 }
