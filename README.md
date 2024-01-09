@@ -35,7 +35,6 @@ go get -u github.com/devsamahd/morm
 
 For more on this package
 - Morm Guides [https://github.com/devsamahd/morm](https://github.com/devsamahd/morm)
-- Gen Guides [https://github.com/devsamahd/morm/gen](https://github.com/devsamahd/morm/gen)
 
 ## Contributing
 
